@@ -1,0 +1,35 @@
+CDMon Updater
+============
+
+This is just another CDMon client to update dynamic DNS.
+It's written in Ruby and built as a gem.
+The main goal for this client is to support multiple users and to provide a flexible configuration.
+
+INSTALL
+=======
+
+You can install it as a gem doing
+  sudo gem sources -a http://gems.github.com #only if you haven't done this before
+  sudo gem install kandalf-cdmon_updater
+
+Or you can clone the repository from git://github.com/kandalf/cdmon_updater.git
+and put bin/cdmon_updater somewhere in your PATH.
+
+After the installation you should create the file /etc/cdmon.yml with a structure like this:
+
+general:
+  dns:          dinamic1.cdmon.net
+  email:        root@server
+  log_level:    DEBUG
+  service_url:  https://dinamico.cdmon.org/onlineService.php
+
+users:
+  cdmon_user:
+    hosts: domain1.com domainX.com
+    md5pass: 1278323gfb37875f2749ju6cabd8io89
+
+You should customize the users section with your personal data. The cdmon_user should be replaced with the user you have associated in your CDMon control panel with your domains.
+As you can have multiple users in CDMon, you can add as many user sections as you need here.
+The md5pass should be the user's password crypted as an MD5 hash, CDMon provides a website to do this (https://www.cdmon.com/webapps/encriptar.php) but you can use the method you like as long as it results on the MD5 hash for your passowrd.
+
+From the general section you should customizde the log_level and the email (which is not yet supported but it will be soon).

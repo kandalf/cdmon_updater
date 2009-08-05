@@ -15,10 +15,12 @@ Gem::Specification.new do |s|
   s.email = %q{leonardomateo@gmail.com}
   s.executables = ["cdmon_updater"]
   s.extra_rdoc_files = [
-    "LICENSE"
+    "LICENSE",
+     "README"
   ]
   s.files = [
     "LICENSE",
+     "README",
      "bin/cdmon_updater",
      "cdmon_updater.gemspec",
      "config/cdmon.yml",
