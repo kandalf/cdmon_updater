@@ -32,21 +32,18 @@ module CDMon
            response = parse_response(http.request(request).body)
             case response["resultat"]
              when Config::CDMON_OK_IP
-               CDMon.logger.info("IP Succesfully updated")
-               CDMon.logger.debug("IP Succesfully updated")
+               CDMon.log_all("IP Succesfully updated")
              when Config::CDMON_BAD_IP
-               CDMon.logger.info("Bad IP Provided")
-               CDMon.logger.debug("Bad IP Provided")
+               CDMon.log_all("Bad IP Provided")
              when Config::CDMON_ERROR_LOGIN
-               CDMon.logger.info("Login Error")
-               CDMon.logger.debug("Login Error")
+               CDMon.log_all("Login Error")
            end
           end
         end
       rescue SocketError
-       CDMon.logger.debug("SocketError: Probably the internet connection is broken")
+       CDMon.log_all("SocketError: Probably the internet connection is broken")
       rescue Resolv::ResolvError
-        CDMon.logger.debug("ResolvError: Cannot get DNS results")
+        CDMon.log_all("ResolvError: Cannot get DNS results")
       end
 
     end
