@@ -15,9 +15,12 @@ module CDMon
     end
 
      def update
-      http = Net::HTTP.new(URI.parse(Config.service_url))
-      request = Net::HTTP::Get.new(Config.get_cdmon_ip_path)
+      url = URI.parse(Config.service_url)
+      http = Net::HTTP.new(url.host, url.port)
+      http.use_ssl = (url.scheme == 'https')
 
+      request = Net::HTTP::Get.new(Config.get_cdmon_ip_path)
+#require 'debug'
        begin
        Config.hosts.each do |host|
          host_ip_by_cdmon = @resolver.getaddress(host).to_s
@@ -42,6 +45,8 @@ module CDMon
         end
       rescue SocketError
        CDMon.logger.debug("SocketError: Probably the internet connection is broken")
+      rescue Resolv::ResolvError
+        CDMon.logger.debug("ResolvError: Cannot get DNS results")
       end
 
     end

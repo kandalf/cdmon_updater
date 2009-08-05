@@ -27,4 +27,10 @@ module CDMon
     end
   end
 
+  def self.log_all(message)
+    logger.info(message)
+    logger.debug(message)
+    logger.warn(message)
+    logger.error(message)
+  end
 end

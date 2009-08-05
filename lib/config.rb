@@ -3,7 +3,7 @@ module Config
   MD5PASS = "7522323b8b37875f2749ba6cabd8cc47"
   EMAIL = "root@server"
   HOSTS = %w"kandalf.com.ar blog.kandalf.com.ar"
-  DNS_NAMES = %w"dinamic1.cdmon.net dinamic2.cdmon.net dinamic3.cdmon.net"
+  DNS_NAMES = ["dinamic1.cdmon.net"]
 
   CDMON_OK_IP = "customok"
   CDMON_BAD_IP = "badip"
