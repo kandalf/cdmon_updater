@@ -1,7 +1,7 @@
 require 'logger'
 
 module CDMon
-
+  VERSION = "0.1.0"
   def self.logger
     @@logger ||= 
       begin

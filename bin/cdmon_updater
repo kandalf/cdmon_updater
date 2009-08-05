@@ -2,7 +2,14 @@
 
 $:<< "../lib/" << "lib/"
 require 'ip_updater'
+require 'rubygems'
 
-updater = CDMon::IPUpdater.new("/etc/cdmon.yml")
+if File.exists?("/etc/cdmon.yml")
+  config_file = "/etc/cdmon.yml"
+else
+  config_file = "#{Gem.dir}/gems/cdmon_updater-#{CDMon::VERSION}/config/cdmon.yml"
+end
+
+updater = CDMon::IPUpdater.new(config_file)
 
 updater.update

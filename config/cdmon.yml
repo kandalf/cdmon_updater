@@ -5,7 +5,7 @@ general:
   service_url:  https://dinamico.cdmon.org/onlineService.php
 
 users:
-  kandalf:
+  cdmon_user:
     hosts: kandalf.com.ar blog.kandalf.com.ar
-    md5pass: 7522323b8b37875f2749ba6cabd8cc47
+    md5pass: 1278323gfb37875f2749ju6cabd8io89
 
