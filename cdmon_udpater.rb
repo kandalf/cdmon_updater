@@ -1,3 +1,5 @@
+#!/usr/bin/ruby
+
 $:<< "lib/"
 require 'ip_updater'
 
