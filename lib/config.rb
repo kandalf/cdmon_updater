@@ -1,6 +1,6 @@
 module Config
-  USER = "kandalf"
-  MD5PASS = "7522323b8b37875f2749ba6cabd8cc47"
+  USER = "cdmon_host_user"
+  MD5PASS = "cdmon_crypted_user_pass"
   EMAIL = "root@server"
   HOSTS = %w"kandalf.com.ar blog.kandalf.com.ar"
   DNS_NAMES = ["dinamic1.cdmon.net"]
