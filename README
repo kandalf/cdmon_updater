@@ -30,6 +30,12 @@ users:
 
 You should customize the users section with your personal data. The cdmon_user should be replaced with the user you have associated in your CDMon control panel with your domains.
 As you can have multiple users in CDMon, you can add as many user sections as you need here.
-The md5pass should be the user's password crypted as an MD5 hash, CDMon provides a website to do this (https://www.cdmon.com/webapps/encriptar.php) but you can use the method you like as long as it results on the MD5 hash for your passowrd.
+The md5pass should be the user's password crypted as an MD5 hash, CDMon provides a website to do this ( https://www.cdmon.com/webapps/encriptar.php ) but you can use the method you like as long as it results on the MD5 hash for your passowrd.
 
 From the general section you should customizde the log_level and the email (which is not yet supported but it will be soon).
+
+After you have your settings, you can run the client manually or you can add the following line to your crontab
+
+0/3 * * * * /usr/bin/cdmon_updater
+
+For it to run every 3 minutes.
