@@ -9,7 +9,7 @@ require 'cdmon'
 #include CDMon
 module CDMon
   class IPUpdater
-    def initialize(config_file = "cdmon.yml")
+    def initialize(config_file = "../config/cdmon.yml")
       Config.load(config_file)
       @resolver = Resolv::DNS.new(:nameserver => Config.dns, :search => ["localhost"], :dots => 1)
       CDMon.log_level = Config.log_level

@@ -1,0 +1,8 @@
+#!/usr/bin/ruby
+
+$:<< "../lib/" << "lib/"
+require 'ip_updater'
+
+updater = CDMon::IPUpdater.new("/etc/cdmon.yml")
+
+updater.update
