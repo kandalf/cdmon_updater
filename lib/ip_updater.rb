@@ -9,12 +9,13 @@ require 'cdmon'
 #include CDMon
 module CDMon
   class IPUpdater
-     def initialize
-     @resolver = Resolv::DNS.new(:nameserver => Config.dns_names, :search => ["localhost"], :dots => 1)
-     CDMon.log_level = "DEBUG"
+    def initialize(config_file = "cdmon.yml")
+      @resolver = Resolv::DNS.new(:nameserver => Config.dns_names, :search => ["localhost"], :dots => 1)
+      Config.load(config_file)
+      CDMon.log_level = Config.log_level
     end
 
-     def update
+    def update
       url = URI.parse(Config.service_url)
       http = Net::HTTP.new(url.host, url.port)
       http.use_ssl = (url.scheme == 'https')

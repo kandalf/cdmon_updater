@@ -1,3 +1,5 @@
+require 'yaml'
+
 module Config
   USER = "cdmon_host_user"
   MD5PASS = "cdmon_crypted_user_pass"
@@ -9,16 +11,28 @@ module Config
   CDMON_BAD_IP = "badip"
   CDMON_ERROR_LOGIN = "errorlogin"
 
-  def self.user
-    USER
+  def self.load(config_file)
+    @@config = YAML::load_file(config_file)
   end
 
-  def self.md5_password
-    MD5PASS
+  def log_level
+    @@config["general"]["log_level"] if @@config
   end
 
-  def self.dns_names
-    DNS_NAMES
+  def self.users
+    @@config["users"]
+  end
+
+  def self.md5_password_for(user)
+    @@config[user.to_s]["md5pass"] if @@config
+  end
+
+  def self.hosts_for(user)
+    @@config[user.to_s]["hosts"].split(" ") if @@config
+  end
+
+  def self.dns
+    @@config["general"]["dns"] if @@config
   end
 
   def self.hosts
@@ -26,15 +40,15 @@ module Config
   end
 
   def self.service_url
-    "https://dinamico.cdmon.org/onlineService.php"  
+    @@config["general"]["service_url"] if @@config
   end
 
-  def self.get_cdmon_ip_path
-    "/onlineService.php?enctype=MD5&n=#{self.user}&p=#{self.md5_password}"
+  def self.get_cdmon_ip_path_for(user)
+    "/onlineService.php?enctype=MD5&n=#{user.to_s}&p=#{self.md5_password_for(user)}"
   end
 
-  def self.cdmon_ip_path_for(address)
-    "/onlineService.php?enctype=MD5&n=#{self.user}&p=#{self.md5_password}&cip=#{address}"
+  def self.cdmon_ip_path_for(user, address)
+    "/onlineService.php?enctype=MD5&n=#{user.to_s}&p=#{self.md5_password_for(user)}&cip=#{address}"
   end
 
 end

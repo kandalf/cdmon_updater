@@ -1,0 +1,11 @@
+general:
+  dns:          dinamic1.cdmon.net
+  email:        root@server
+  log_level:    DEBUG
+  service_url:  https://dinamico.cdmon.org/onlineService.php
+
+users:
+  kandalf:
+    hosts: kandalf.com.ar blog.kandalf.com.ar
+    md5pass: 7522323b8b37875f2749ba6cabd8cc47
+
