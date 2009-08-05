@@ -15,7 +15,7 @@ module Config
     @@config = YAML::load_file(config_file)
   end
 
-  def log_level
+  def self.log_level
     @@config["general"]["log_level"] if @@config
   end
 
@@ -24,11 +24,11 @@ module Config
   end
 
   def self.md5_password_for(user)
-    @@config[user.to_s]["md5pass"] if @@config
+    @@config["users"][user.to_s]["md5pass"] if @@config
   end
 
   def self.hosts_for(user)
-    @@config[user.to_s]["hosts"].split(" ") if @@config
+    @@config["users"][user.to_s]["hosts"].split(" ") if @@config
   end
 
   def self.dns

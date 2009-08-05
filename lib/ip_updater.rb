@@ -10,8 +10,8 @@ require 'cdmon'
 module CDMon
   class IPUpdater
     def initialize(config_file = "cdmon.yml")
-      @resolver = Resolv::DNS.new(:nameserver => Config.dns_names, :search => ["localhost"], :dots => 1)
       Config.load(config_file)
+      @resolver = Resolv::DNS.new(:nameserver => Config.dns, :search => ["localhost"], :dots => 1)
       CDMon.log_level = Config.log_level
     end
 
@@ -20,25 +20,26 @@ module CDMon
       http = Net::HTTP.new(url.host, url.port)
       http.use_ssl = (url.scheme == 'https')
 
-      request = Net::HTTP::Get.new(Config.get_cdmon_ip_path)
 #require 'debug'
-       begin
-       Config.hosts.each do |host|
-         host_ip_by_cdmon = @resolver.getaddress(host).to_s
-         values = parse_response(http.request(request).body)
-         current_cdmon_ip = values["newip"] if values.has_key?("newip")
-       
-         unless host_ip_by_cdmon == current_cdmon_ip
-           request = Net::HTTP::Get.new(Config.cdmon_ip_path_for(current_cdmon_ip))
-           response = parse_response(http.request(request).body)
-            case response["resultat"]
-             when Config::CDMON_OK_IP
-               CDMon.log_all("IP Succesfully updated")
-             when Config::CDMON_BAD_IP
-               CDMon.log_all("Bad IP Provided")
-             when Config::CDMON_ERROR_LOGIN
-               CDMon.log_all("Login Error")
-           end
+      begin
+        Config.users.keys.each do |usr|
+          request = Net::HTTP::Get.new(Config.get_cdmon_ip_path_for(usr))
+          Config.hosts_for(usr).each do |host|
+            host_ip_by_cdmon = @resolver.getaddress(host).to_s
+            values = parse_response(http.request(request).body)
+            current_cdmon_ip = values["newip"] if values.has_key?("newip")
+            unless host_ip_by_cdmon == current_cdmon_ip
+              request = Net::HTTP::Get.new(Config.cdmon_ip_path_for(usr, current_cdmon_ip))
+              response = parse_response(http.request(request).body)
+              case response["resultat"]
+                when Config::CDMON_OK_IP
+                  CDMon.log_all("IP Succesfully updated")
+                when Config::CDMON_BAD_IP
+                  CDMon.log_all("Bad IP Provided")
+                when Config::CDMON_ERROR_LOGIN
+                  CDMon.log_all("Login Error")
+              end
+            end
           end
         end
       rescue SocketError
