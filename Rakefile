@@ -10,7 +10,7 @@ begin
     s.description = %q{Just another client for CDMon (http://www.cdmon.com) dynamic DNS.}
     s.email = %q{leonardomateo@gmail.com}
     s.executables = ["cdmon_updater"]
-    s.files = ["bin/cdmon_updater", "config/cdmon.yml", "config/schedule.rb", "lib/cdmon.rb", "lib/config.rb", "lib/ip_updater.rb", "cdmon_updater.gemspec", "LICENSE", "README"]
+    s.files = ["bin/cdmon_updater", "config/cdmon.yml", "config/schedule.rb", "lib/cdmon.rb", "lib/config.rb", "lib/ip_updater.rb", "lib/mailer.rb", "spec/spec_helper.rb", "spec/mailer_spec.rb", "cdmon_updater.gemspec", "LICENSE", "README"]
     s.has_rdoc = false
     s.homepage = %q{http://github.com/kandalf/cdmon_updater}
     s.require_paths = ["lib"]
