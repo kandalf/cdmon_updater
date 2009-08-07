@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cdmon_updater}
-  s.version = "0.1.1"
+  s.version = "0.1.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
   s.authors = ["Leonardo Mateo"]
@@ -39,7 +39,8 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.5}
   s.summary = %q{A client updater for CDMon dynamic DNS.}
   s.test_files = [
-    "spec/spec_helper.rb",
+    "spec/ip_updater_spec.rb",
+     "spec/spec_helper.rb",
      "spec/mailer_spec.rb"
   ]
 
