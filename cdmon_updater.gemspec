@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
   s.authors = ["Leonardo Mateo"]
-  s.date = %q{2009-08-05}
+  s.date = %q{2009-08-07}
   s.default_executable = %q{cdmon_updater}
   s.description = %q{Just another client for CDMon (http://www.cdmon.com) dynamic DNS.}
   s.email = %q{leonardomateo@gmail.com}
@@ -27,7 +27,10 @@ Gem::Specification.new do |s|
      "config/schedule.rb",
      "lib/cdmon.rb",
      "lib/config.rb",
-     "lib/ip_updater.rb"
+     "lib/ip_updater.rb",
+     "lib/mailer.rb",
+     "spec/mailer_spec.rb",
+     "spec/spec_helper.rb"
   ]
   s.homepage = %q{http://github.com/kandalf/cdmon_updater}
   s.rdoc_options = ["--charset=UTF-8"]
@@ -35,6 +38,10 @@ Gem::Specification.new do |s|
   s.rubyforge_project = %q{cdmon_updater}
   s.rubygems_version = %q{1.3.5}
   s.summary = %q{A client updater for CDMon dynamic DNS.}
+  s.test_files = [
+    "spec/spec_helper.rb",
+     "spec/mailer_spec.rb"
+  ]
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
