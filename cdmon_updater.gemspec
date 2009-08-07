@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cdmon_updater}
-  s.version = "0.1.5"
+  s.version = "0.1.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
   s.authors = ["Leonardo Mateo"]
-  s.date = %q{2009-08-05}
+  s.date = %q{2009-08-07}
   s.default_executable = %q{cdmon_updater}
   s.description = %q{Just another client for CDMon (http://www.cdmon.com) dynamic DNS.}
   s.email = %q{leonardomateo@gmail.com}
