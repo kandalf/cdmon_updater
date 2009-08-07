@@ -60,19 +60,20 @@ module CDMon
     #instance methods
     def send_mail
       body = mail_headers
-      body << @message
+      body << "#{Time.now.to_s} - #{@message}"
 
       begin
-        @to.each do | to |
+        @to.split(",").each do | to |
 
             Net::SMTP.start(@@address, @@port, @from, @@credentials[:user_name], @@credentials[:password], :login)  do |smtp|
               
-              smtp.send_message(body, @from, to)
+              smtp.send_message(body, @from, to.strip)
 
             end
          end
          true
-       rescue Error => e
+       rescue
+        CDMon.log_all("Cannot send email")
         false
        end
     end

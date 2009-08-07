@@ -46,7 +46,7 @@ module Config
   end
 
   def self.mail_on_error?
-    (@@config["general"]["send_mail_on_error"] == "yes")
+    @@config["general"]["send_mail_on_error"]
   end
 
   def self.hosts
