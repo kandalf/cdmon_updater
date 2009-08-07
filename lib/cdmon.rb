@@ -1,4 +1,5 @@
 require 'logger'
+require 'config'
 
 module CDMon
   VERSION = "0.1.0"

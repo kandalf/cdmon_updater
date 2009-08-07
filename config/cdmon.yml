@@ -4,8 +4,14 @@ general:
   log_level:    DEBUG
   service_url:  https://dinamico.cdmon.org/onlineService.php
 
+mailer:
+  address: relay.someserver.com.ar
+  port: 25
+  domain: kandalf.com.ar
+  user_name: someuser #without @domain
+  password: plain_password
+
 users:
   cdmon_user:
     hosts: kandalf.com.ar blog.kandalf.com.ar
     md5pass: 1278323gfb37875f2749ju6cabd8io89
-

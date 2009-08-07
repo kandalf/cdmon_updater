@@ -11,6 +11,8 @@ module Config
   CDMON_BAD_IP = "badip"
   CDMON_ERROR_LOGIN = "errorlogin"
 
+  @@config = {}
+
   def self.load(config_file)
     @@config = YAML::load_file(config_file)
   end
@@ -21,6 +23,10 @@ module Config
 
   def self.users
     @@config["users"]
+  end
+
+  def self.mailer
+    @@config["mailer"]
   end
 
   def self.md5_password_for(user)
