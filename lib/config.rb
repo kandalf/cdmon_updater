@@ -29,6 +29,10 @@ module Config
     @@config["mailer"]
   end
 
+  def self.mail_to
+   @@config["general"]["email"] if @@config 
+  end
+
   def self.md5_password_for(user)
     @@config["users"][user.to_s]["md5pass"] if @@config
   end
@@ -39,6 +43,10 @@ module Config
 
   def self.dns
     @@config["general"]["dns"] if @@config
+  end
+
+  def self.mail_on_error?
+    (@@config["general"]["send_mail_on_error"] == "yes")
   end
 
   def self.hosts

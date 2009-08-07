@@ -8,6 +8,7 @@ module CDMon
     if Config.mailer
       @@address = Config.mailer["address"]
       @@port = Config.mailer["port"]
+      @@domain = Config.mailer["domain"]
       @@credentials[:user_name] = Config.mailer["user_name"]
       @@credentials[:password] = Config.mailer["password"]
     else
@@ -22,6 +23,7 @@ module CDMon
 
         @@address = server_options["address"]
         @@port = server_options["port"]
+        @@domain = server_options["domain"]
         @@credentials[:user_name] = server_options["user_name"]
         @@credentials[:password] = server_options["password"]
       end
@@ -41,7 +43,13 @@ module CDMon
     def self.port=(port)
       @@port = port
     end
-
+  
+    def self.domain
+      @@domain
+    end
+    def self.domain=(domain)
+      @@domain = domain
+    end
     def self.credentials
       @@credentials
     end
