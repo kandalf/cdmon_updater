@@ -44,6 +44,9 @@ module CDMon
     mailer.to = Config.mail_to
     mailer.subject = "CDMon Updater ERROR"
     mailer.message = message
-    self.log_all("Cannot send mail") unless mailer.send_mail
+    unless mailer.send_mail
+      logger.debug("Cannot send mail")
+      logger.info("Cannot send mail")
+    end
   end
 end
