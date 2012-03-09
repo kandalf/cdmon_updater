@@ -13,5 +13,8 @@ Gem::Specification.new do |gem|
   gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   gem.name          = "cdmon_updater"
   gem.require_paths = ["lib"]
-  gem.version       = CdmonUpdater::VERSION
+  gem.version       = CDMonUpdater::VERSION
+
+  gem.add_development_dependency 'rake'
+  gem.add_development_dependency 'rspec'
 end

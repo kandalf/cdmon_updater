@@ -1,3 +1,3 @@
-module CdmonUpdater
-  VERSION = "0.0.1"
+module CDMonUpdater
+  VERSION = "0.2.0"
 end

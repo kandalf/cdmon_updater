@@ -1,10 +1,10 @@
 require 'spec_helper'
 require 'ip_updater'
 
-describe CDMon::IPUpdater do
+describe CDMonUpdater::IPUpdater do
 
   before(:all) do
-    @updater = CDMon::IPUpdater.new("/etc/cdmon.yml")
+    @updater = CDMonUpdater::IPUpdater.new("/etc/cdmon.yml")
 
   end
 
