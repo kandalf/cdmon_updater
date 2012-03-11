@@ -4,7 +4,7 @@ require 'ip_updater'
 describe CDMonUpdater::IPUpdater do
 
   before(:all) do
-    @updater = CDMonUpdater::IPUpdater.new("/etc/cdmon.yml")
+    @updater = CDMonUpdater::IPUpdater.new(File.dirname(__FILE__) + "/../config/cdmon.yml")
 
   end
 

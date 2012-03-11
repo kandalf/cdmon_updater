@@ -1,9 +1,9 @@
 require 'socket'
 require 'net/http'
 require 'net/https'
-require 'config'
 require 'resolv'
-require File.dirname(__FILE__) + '/cdmon_updater'
+require_relative 'cdmon_updater/config'
+require_relative 'cdmon_updater'
 
 module CDMonUpdater
   class IPUpdater

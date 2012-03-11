@@ -1,7 +1,6 @@
 require 'net/smtp'
-require 'cdmon'
 
-module CDMon
+module CDMonUpdater
   class Mailer < Net::SMTP
     attr_accessor :subject, :message, :from, :to
 

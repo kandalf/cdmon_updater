@@ -1,19 +1,19 @@
 require 'spec_helper'
-require 'mailer'
+require File.dirname(__FILE__) + '/../lib/cdmon_updater/mailer'
 
-describe CDMon::Mailer do
+describe CDMonUpdater::Mailer do
 
   before(:all) do
     server_options = {"server" => {"address" => "some.smtp.server", "port" => 25, "user_name" => "user", "password" => "smtp_password"}}
     
-    @mailer = CDMon::Mailer.new(server_options)
+    @mailer = CDMonUpdater::Mailer.new(server_options)
   end
 
   it "should have class options set" do
-    CDMon::Mailer.address.should == "some.smtp.server"
-    CDMon::Mailer.port.should == 25
-    CDMon::Mailer.credentials[:user_name].should == "user"
-    CDMon::Mailer.credentials[:password].should == "smtp_password"
+    CDMonUpdater::Mailer.address.should == "some.smtp.server"
+    CDMonUpdater::Mailer.port.should == 25
+    CDMonUpdater::Mailer.credentials[:user_name].should == "user"
+    CDMonUpdater::Mailer.credentials[:password].should == "smtp_password"
   end
 
   it "should have instance attributes" do
