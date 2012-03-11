@@ -1,6 +1,6 @@
-#!/usr/bin/ruby
+#!/usr/bin/env ruby
 
-require './ip_updater'
+require_relative '../lib/ip_updater'
 require 'rubygems'
 
 if File.exists?("/etc/cdmon.yml")
