@@ -1,15 +1,16 @@
 require 'net/smtp'
+require File.dirname(__FILE__) + '/config'
 
 module CDMonUpdater
   class Mailer < Net::SMTP
     attr_accessor :subject, :message, :from, :to
 
-    if Config.mailer
-      @@address = Config.mailer["address"]
-      @@port = Config.mailer["port"]
-      @@domain = Config.mailer["domain"]
-      @@credentials[:user_name] = Config.mailer["user_name"]
-      @@credentials[:password] = Config.mailer["password"]
+    if CDMonUpdater::Config.mailer
+      @@address = CDMonUpdater::Config.mailer["address"]
+      @@port = CDMonUpdater::Config.mailer["port"]
+      @@domain = CDMonUpdater::Config.mailer["domain"]
+      @@credentials[:user_name] = CDMonUpdater::Config.mailer["user_name"]
+      @@credentials[:password] = CDMonUpdater::Config.mailer["password"]
     else
       @@address = nil
       @@port = nil
