@@ -31,7 +31,7 @@ module CDMonUpdater
     end
 
     def self.mail_to
-    @@config["general"]["email"] if @@config
+      @@config["general"]["email"] if @@config
     end
 
     def self.md5_password_for(user)
