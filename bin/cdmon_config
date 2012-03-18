@@ -1,0 +1,120 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+
+options = {}
+@config_options = {}
+
+optparse = OptionParser.new do |opts|
+  opts.banner = "Usage cdmon_config [options]
+  If no options are given, current configuration will be shown."
+
+  opts.on('-g', '--generate', 'Generates configuration') do
+    options[:generate] = true
+  end
+
+  opts.on('-e', '--encode', 'Encode password with MD5') do
+    options[:encode] = true
+  end
+
+  opts.on( "-h", "--help", "Display this screen") do |opt|
+    puts opts
+    exit
+  end
+end
+
+optparse.parse!
+
+def encode_password
+  require 'digest/md5'
+
+  puts 'Enter your password. (Your input will not be shown)'
+  `stty -echo`
+  password = gets.strip
+  @config_options[:password] = Digest::MD5.hexdigest password
+  puts
+  `stty echo`
+  puts @config_options[:password]
+end
+
+def generate_config_file
+  raise 'Empty config options' if @config_options.empty?
+  
+  config = <<-EOS
+general:
+      dns:          dinamic1.cdmon.net
+      email:        root@server
+      log_level:    DEBUG
+      service_url:  https://dinamico.cdmon.org/onlineService.php
+      send_mail_on_error: #{@config_options[:send_mail]}
+users:
+  #{@config_options[:username]}:
+    hosts: #{@config_options[:hosts]}
+    md5pass: #{@config_options[:password]}
+
+mailer:
+  address: #{@config_options[:mailer_address]}
+  port: #{@config_options[:mailer_port]}
+  domain: #{@config_options[:mailer_domain]}
+  user_name: #{@config_options[:mailer_username]} #without @domain
+  password: #{@config_options[:mailer_password]}
+    EOS
+
+  begin
+    File.open("/etc/cdmon.yml", "w") do |f|
+      f.puts config.strip
+    end
+    puts File.read("/etc/cdmon.yml")
+  rescue Errno::EACCES
+    puts "Can't open /etc/cdmon.yml for writing. Copy and paste this into /etc/cdmon.yml as root"
+    puts config
+  end
+
+end
+
+if options[:encode]
+  encode_password 
+  exit
+end
+
+if options[:generate]
+  puts 'Enter your CDMON username'
+  @config_options[:username] = gets.strip
+  encode_password
+
+  puts 'Enter your hosts (white space separated)'
+  @config_options[:hosts] = gets.strip
+
+  puts 'Send mail on error? (yes/no)'
+  send_mail = gets.strip
+  @config_options[:send_mail] = (send_mail.downcase == 'yes') ? 'yes' : 'no'
+
+  if @config_options[:send_mail] == 'yes'
+    puts 'Enter your mail server address'
+    @config_options[:mailer_address] = gets.strip
+
+    puts 'Enter your mail server port (25)'
+    port = gets.strip
+    @config_options[:mailer_port] = (port.empty?) ? '25' : port
+
+    puts 'Enter your domain'
+    @config_options[:mailer_domain] = gets.strip
+    
+    puts 'Enter your mailer user name (without the domain)'
+    @config_options[:mailer_username] = gets.strip
+
+    puts 'Enter your mailer password (input will not be shown)'
+    `stty -echo`
+    @config_options[:mailer_password] = gets.strip
+    `stty echo`
+  else
+    @config_options[:mailer_address] = 'relay.someserver.com.ar'
+    @config_options[:mailer_port] = '25'
+    @config_options[:mailer_domain] = 'example.com'
+    @config_options[:mailer_username] = 'someuser'
+    @config_options[:mailer_password] = 'secret'
+  end
+  generate_config_file 
+end
+
+
