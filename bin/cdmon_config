@@ -25,6 +25,10 @@ end
 
 optparse.parse!
 
+def show_config
+  puts File.read("/etc/cdmon.yml")
+end
+
 def encode_password
   require 'digest/md5'
 
@@ -64,12 +68,17 @@ mailer:
     File.open("/etc/cdmon.yml", "w") do |f|
       f.puts config.strip
     end
-    puts File.read("/etc/cdmon.yml")
+    show_config
   rescue Errno::EACCES
     puts "Can't open /etc/cdmon.yml for writing. Copy and paste this into /etc/cdmon.yml as root"
     puts config
   end
 
+end
+
+if options.empty?
+  show_config
+  exit
 end
 
 if options[:encode]
