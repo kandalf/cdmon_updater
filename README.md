@@ -25,6 +25,7 @@ If you need to change the settings you can modify the config file
 later with any text editor.
 The config file has the following structure:
 
+```
 general:
   dns:          dinamic1.cdmon.net
   email:        root@server
@@ -43,6 +44,7 @@ mailer:
   domain: kandalf.com.ar
   user_name: someuser #without @domain
   password: plain_password
+```
 
 The cdmon_user is the user you have associated in your CDMon control panel with your domains.
 As you can have multiple users in CDMon, you can add as many user sections as you need here.
@@ -63,7 +65,7 @@ the subject of "CDMon Updater ERROR".
 
 After you have your settings, you can run the client manually or you can add the following line to your crontab
 
-0/3 * * * * /usr/bin/cdmon_updater
+`0/3 * * * * /usr/bin/cdmon_updater`
 
 For it to run every 3 minutes.
 
